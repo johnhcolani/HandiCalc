@@ -14,7 +14,7 @@ class FractionCalculatorScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF191818),
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xFF191818),
         title: Center(
           child: Text(
             'Handy Calculator',
@@ -46,7 +46,7 @@ class FractionCalculatorScreen extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.purple.withOpacity(0.1),
+          color: Colors.blue.withOpacity(0.1),
           border: GradientBoxBorder(
             width: 2,
             gradient: LinearGradient(colors: [
@@ -87,7 +87,8 @@ class FractionCalculatorScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 4.0),
       child: Row(
         children: [
-          Expanded(child: _buildResultContainer("in", state.inchResult, Colors.grey)),
+          Expanded(child: _buildResultContainer("in", state.inchResult, Color(
+              0xFFC7ADD5))),
           const SizedBox(width: 8),
           Expanded(child: _buildResultContainer("ft", state.feetInchResult, Colors.white)),
         ],
@@ -98,8 +99,8 @@ class FractionCalculatorScreen extends StatelessWidget {
   Widget _buildResultContainer(String label, String result, Color textColor) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF191818),
-        border: Border.all(color: Colors.grey.withOpacity(0.8), width: 2),
+        color: Colors.blue.withOpacity(0.1),
+        border: Border.all(color: Colors.grey, width: 2),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(

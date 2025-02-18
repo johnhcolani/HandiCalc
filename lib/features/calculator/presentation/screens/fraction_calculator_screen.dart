@@ -17,14 +17,14 @@ class FractionCalculatorScreen extends StatelessWidget {
         backgroundColor: Color(0xFF191818),
         title: Center(
           child: Text(
-            'Handy Calculator',
+            'Fraction Flow',
             style: TextStyle(color: Colors.grey.shade300),
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.more_vert, color: Colors.white),
-          onPressed: () {},
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.more_vert, color: Colors.white),
+        //   onPressed: () {},
+        // ),
       ),
       body: BlocBuilder<CalculatorBloc, CalculatorState>(
         builder: (context, state) {

@@ -4,6 +4,7 @@ import 'package:handi_calc/features/splash_feature/presentation/bloc/splash_bloc
 import 'package:handi_calc/features/splash_feature/presentation/bloc/splash_event.dart';
 
 import '../../../../fraction_calculator_screen.dart';
+import '../../../calculator/presentation/screens/fraction_calculator_screen.dart';
 import '../bloc/splash_state.dart';
 
 class SplashScreen extends StatefulWidget {

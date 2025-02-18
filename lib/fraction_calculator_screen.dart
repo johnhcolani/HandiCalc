@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:fraction/fraction.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-class FractionCalculatorScreen extends StatefulWidget {
-  const FractionCalculatorScreen({super.key});
+class FractionCalculatorScreen1 extends StatefulWidget {
+  const FractionCalculatorScreen1({super.key});
 
   @override
-  _FractionCalculatorScreenState createState() => _FractionCalculatorScreenState();
+  _FractionCalculatorScreenState createState() =>
+      _FractionCalculatorScreenState();
 }
 
-class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
+class _FractionCalculatorScreenState extends State<FractionCalculatorScreen1> {
   String displayText = '0';
   String expression = '';
   String inchResult = '';
@@ -29,14 +30,9 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
   final Color fractionTextColor = Colors.white;
   final Color defaultColor = Colors.grey[850]!;
   final Color defaultTextColor = Colors.white;
-  final Color backgroundColor=Color(0xFF191818FF);
+  final Color backgroundColor = Color(0xFF191818FF);
 
   bool _isVisible = false;
-
-
-
-
-
 
   void onButtonPressed(String buttonText) {
     setState(() {
@@ -95,7 +91,8 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
       displayText = formatFractionAsMixed(_result!);
       inchResult = "${formatFractionAsMixed(_result!)} inches";
       feetInchResult = convertToFeetAndInches(_result!);
-      expression = "$expression ${formatFractionAsMixed(_currentInput)} = ${formatFractionAsMixed(_result!)}";
+      expression =
+          "$expression ${formatFractionAsMixed(_currentInput)} = ${formatFractionAsMixed(_result!)}";
     }
     _operator = '';
     _isNewNumber = true;
@@ -124,11 +121,16 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
 
   Fraction calculateResult(Fraction num1, Fraction num2, String operator) {
     switch (operator) {
-      case "+": return num1 + num2;
-      case "-": return num1 - num2;
-      case "×": return num1 * num2;
-      case "÷": return num1 / num2;
-      default: return Fraction(0);
+      case "+":
+        return num1 + num2;
+      case "-":
+        return num1 - num2;
+      case "×":
+        return num1 * num2;
+      case "÷":
+        return num1 / num2;
+      default:
+        return Fraction(0);
     }
   }
 
@@ -166,29 +168,45 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
 
     return integerPart == 0
         ? (isNegative ? "-$fraction" : "$fraction")
-        : (isNegative ? "-$integerPart ${fractionalPart.toString()}" : "$integerPart ${fractionalPart.toString()}");
+        : (isNegative
+            ? "-$integerPart ${fractionalPart.toString()}"
+            : "$integerPart ${fractionalPart.toString()}");
   }
 
-  Widget buildButton(String text, {Color color = Colors.grey, Color textColor = Colors.white, double textSize = 24, bool isOval = false}) {
+  Widget buildButton(String text,
+      {Color color = Colors.grey,
+      Color textColor = Colors.white,
+      double textSize = 24,
+      bool isOval = false}) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Container(
           decoration: BoxDecoration(
-            border: GradientBoxBorder( width: 2,gradient: LinearGradient(colors: [Colors.blue.shade300, Colors.purple.shade300])),
+            border: GradientBoxBorder(
+                width: 2,
+                gradient: LinearGradient(
+                    colors: [Colors.blue.shade300, Colors.purple.shade300])),
             borderRadius: BorderRadius.circular(24),
             color: color,
-           // borderRadius: BorderRadius.circular(isOval ? 42 : 32),
+            // borderRadius: BorderRadius.circular(isOval ? 42 : 32),
           ),
           child: ElevatedButton(
             onPressed: () => onButtonPressed(text),
             style: ElevatedButton.styleFrom(
               backgroundColor: color,
-              padding: isOval ? const EdgeInsets.symmetric(horizontal: 40, vertical: 23) : const EdgeInsets.all(14),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(isOval ? 32 : 24)),
+              padding: isOval
+                  ? const EdgeInsets.symmetric(horizontal: 40, vertical: 23)
+                  : const EdgeInsets.all(14),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(isOval ? 32 : 24)),
               elevation: 2,
             ),
-            child: Text(text, style: TextStyle(fontSize: textSize, fontWeight: FontWeight.bold, color: textColor)),
+            child: Text(text,
+                style: TextStyle(
+                    fontSize: textSize,
+                    fontWeight: FontWeight.bold,
+                    color: textColor)),
           ),
         ),
       ),
@@ -198,7 +216,8 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
   Widget buildFractionRow(List<String> fractions) {
     return Row(
       children: fractions
-          .map((fraction) => buildButton(fraction, color: fractionColor, textColor: fractionTextColor, textSize: 16))
+          .map((fraction) => buildButton(fraction,
+              color: fractionColor, textColor: fractionTextColor, textSize: 16))
           .toList(),
     );
   }
@@ -207,7 +226,19 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF191818FF),
-      appBar: AppBar(backgroundColor: Colors.black, title: Text('Handy Calculator', style: TextStyle(color: Colors.grey.shade300))),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Center(
+          child: Text(
+            'Handy Calculator',
+            style: TextStyle(
+              color: Colors.grey.shade300,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        leading: IconButton(onPressed: (){}, icon: Icon(Icons.more_vert,color: Colors.white,)),
+      ),
       body: Column(
         children: [
           Padding(
@@ -217,20 +248,35 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
                 color: Colors.purple.withOpacity(0.1),
                 //gradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
 
-                border: GradientBoxBorder( width: 2,gradient: LinearGradient(colors: [Colors.blue.shade300, Colors.purple.shade300])),
+                border: GradientBoxBorder(
+                    width: 2,
+                    gradient: LinearGradient(colors: [
+                      Colors.blue.shade300,
+                      Colors.purple.shade300
+                    ])),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
                 children: [
                   Container(
                     alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    child: Text(expression, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.grey[300])),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    child: Text(expression,
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[300])),
                   ),
                   Container(
                     alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                    child: Text(displayText, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white)),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                    child: Text(displayText,
+                        style: const TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
                   ),
                 ],
               ),
@@ -240,9 +286,12 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
             padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 4.0),
             child: Row(
               children: [
-                Expanded(child: buildResultContainer("in", inchResult, Colors.grey)),
+                Expanded(
+                    child: buildResultContainer("in", inchResult, Colors.grey)),
                 const SizedBox(width: 8),
-                Expanded(child: buildResultContainer("ft", feetInchResult, Colors.white)),
+                Expanded(
+                    child: buildResultContainer(
+                        "ft", feetInchResult, Colors.white)),
               ],
             ),
           ),
@@ -251,15 +300,44 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
             child: Column(
               children: [
                 Row(children: [
-                  buildButton("C", color: operandColor, textColor: operandTextColor),
-                  buildButton("±", color: operandColor, textColor: operandTextColor),
-                  buildButton("%", color: operandColor, textColor: operandTextColor),
-                  buildButton("÷", color: operandColor, textColor: operandTextColor),
+                  buildButton("C",
+                      color: operandColor, textColor: operandTextColor),
+                  buildButton("±",
+                      color: operandColor, textColor: operandTextColor),
+                  buildButton("%",
+                      color: operandColor, textColor: operandTextColor),
+                  buildButton("÷",
+                      color: operandColor, textColor: operandTextColor),
                 ]),
-                Row(children: [buildButton("7"), buildButton("8"), buildButton("9"), buildButton("×", color: operandColor, textColor: operandTextColor)]),
-                Row(children: [buildButton("4"), buildButton("5"), buildButton("6"), buildButton("-", color: operandColor, textColor: operandTextColor)]),
-                Row(children: [buildButton("1"), buildButton("2"), buildButton("3"), buildButton("+", color: operandColor, textColor: operandTextColor)]),
-                Row(children: [buildButton("0"), buildButton("1/2"), buildButton("=", color: operandColor, textColor: operandTextColor, isOval: false)]),
+                Row(children: [
+                  buildButton("7"),
+                  buildButton("8"),
+                  buildButton("9"),
+                  buildButton("×",
+                      color: operandColor, textColor: operandTextColor)
+                ]),
+                Row(children: [
+                  buildButton("4"),
+                  buildButton("5"),
+                  buildButton("6"),
+                  buildButton("-",
+                      color: operandColor, textColor: operandTextColor)
+                ]),
+                Row(children: [
+                  buildButton("1"),
+                  buildButton("2"),
+                  buildButton("3"),
+                  buildButton("+",
+                      color: operandColor, textColor: operandTextColor)
+                ]),
+                Row(children: [
+                  buildButton("0"),
+                  buildButton("1/2"),
+                  buildButton("=",
+                      color: operandColor,
+                      textColor: operandTextColor,
+                      isOval: false)
+                ]),
                 buildFractionRow(["1/8", "3/8", "5/8", "7/8"]),
                 buildFractionRow(["1/16", "3/16", "5/16", "7/16"]),
                 buildFractionRow(["9/16", "11/16", "13/16", "15/16"]),
@@ -274,12 +352,19 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
                   width: double.infinity,
                   height: 60,
                   decoration: BoxDecoration(
-
                     //gradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
-                    border: GradientBoxBorder( width: 2,gradient: LinearGradient(colors: [operandColor, Colors.blue.shade300],begin: Alignment.topLeft,end: Alignment.bottomRight),),
+                    border: GradientBoxBorder(
+                      width: 2,
+                      gradient: LinearGradient(
+                          colors: [operandColor, Colors.blue.shade300],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight),
+                    ),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: const Center(child: Text('Ad would be here', style: TextStyle(color: Colors.white))),
+                  child: const Center(
+                      child: Text('Ad would be here',
+                          style: TextStyle(color: Colors.white))),
                 ),
               ),
             ),
@@ -302,7 +387,11 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(label, style: const TextStyle(color: Colors.white)),
-            Text(result, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: textColor)),
+            Text(result,
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: textColor)),
           ],
         ),
       ),

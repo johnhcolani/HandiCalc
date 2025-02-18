@@ -7,24 +7,39 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:fraction/fraction.dart';
+import 'package:handi_calc/features/calculator/domain/usecases/calculator_use_case.dart';
+import 'package:handi_calc/features/calculator/domain/usecases/convert_units_use_case.dart';
+import 'package:handi_calc/features/calculator/domain/usecases/format_fraction_use_case.dart';
+import 'package:handi_calc/features/calculator/domain/usecases/parse_fraction_use_case.dart';
 
 import 'package:handi_calc/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  final calculate = CalculateUseCase();
+  final format = FormatFractionUseCase();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  test('Adding 3/8 + 1/8', () {
+    final result = calculate.execute(Fraction(3, 8), Fraction(1, 8), "+");
+    expect(format.execute(result), equals("1/2"));
+  });
+  test('Format negative fraction', () {
+    final useCase = FormatFractionUseCase();
+    expect(useCase.execute(Fraction(-5, 2)), equals('-2 1/2'));
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  test('Convert negative inches', () {
+    final useCase = ConvertUnitsUseCase();
+    expect(useCase.execute(Fraction(-15, 2)), equals('-0 ft 7 1/2 in'));
+  });
+  test('Format negative fraction', () {
+    final useCase = FormatFractionUseCase();
+    expect(useCase.execute(Fraction(-3, 2)), equals('-1 1/2'));
+    expect(useCase.execute(Fraction(3, 2)), equals('1 1/2'));
+    expect(useCase.execute(Fraction(-5)), equals('-5'));
+  });
+  test('Parse negative mixed number', () {
+    final useCase = ParseFractionUseCase();
+    expect(useCase.execute('-2 3/4'), equals(Fraction(-11, 4)));
   });
 }

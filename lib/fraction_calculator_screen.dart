@@ -25,10 +25,11 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
 
   final Color operandColor = const Color(0xFFFF9F0A);
   final Color operandTextColor = Colors.white;
-  final Color fractionColor = const Color(0xFF333333);
+  final Color fractionColor = const Color(0xFF575454);
   final Color fractionTextColor = Colors.white;
   final Color defaultColor = Colors.grey[850]!;
   final Color defaultTextColor = Colors.white;
+  final Color backgroundColor=Color(0xFF191818FF);
 
   bool _isVisible = false;
 
@@ -174,8 +175,10 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
         padding: const EdgeInsets.all(4.0),
         child: Container(
           decoration: BoxDecoration(
+            border: GradientBoxBorder( width: 2,gradient: LinearGradient(colors: [Colors.blue.shade300, Colors.purple.shade300])),
+            borderRadius: BorderRadius.circular(24),
             color: color,
-            borderRadius: BorderRadius.circular(isOval ? 42 : 32),
+           // borderRadius: BorderRadius.circular(isOval ? 42 : 32),
           ),
           child: ElevatedButton(
             onPressed: () => onButtonPressed(text),
@@ -203,7 +206,7 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xFF191818FF),
       appBar: AppBar(backgroundColor: Colors.black, title: Text('Handy Calculator', style: TextStyle(color: Colors.grey.shade300))),
       body: Column(
         children: [
@@ -211,6 +214,7 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
+                color: Colors.purple.withOpacity(0.1),
                 //gradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
 
                 border: GradientBoxBorder( width: 2,gradient: LinearGradient(colors: [Colors.blue.shade300, Colors.purple.shade300])),
@@ -288,8 +292,8 @@ class _FractionCalculatorScreenState extends State<FractionCalculatorScreen> {
   Widget buildResultContainer(String label, String result, Color textColor) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black,
-        border: Border.all(color: Colors.grey.withOpacity(0.3), width: 2),
+        color: Color(0xFF191818FF),
+        border: Border.all(color: Colors.grey.withOpacity(0.8), width: 2),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(

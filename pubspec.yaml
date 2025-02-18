@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   fraction: ^5.0.3
   gradient_borders: ^1.0.1
+  another_flutter_splash_screen: ^1.2.1
 
 dev_dependencies:
   flutter_test:

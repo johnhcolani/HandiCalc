@@ -109,11 +109,21 @@ class FractionCalculatorScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(label, style: const TextStyle(color: Colors.white)),
-            Text(result,
-                style: TextStyle(
+
+            // Auto-scale font to fit within the container
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.scaleDown, // Scale text down if it overflows
+                child: Text(
+                  result,
+                  style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: textColor)),
+                    color: textColor,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

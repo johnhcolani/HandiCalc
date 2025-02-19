@@ -33,7 +33,7 @@ class FractionCalculatorScreen extends StatelessWidget {
               _buildDisplaySection(context, state),
               _buildResultContainers(state),
               _buildCalculatorButtons(context),
-              _buildAdBanner(),
+             // _buildAdBanner(),
             ],
           );
         },

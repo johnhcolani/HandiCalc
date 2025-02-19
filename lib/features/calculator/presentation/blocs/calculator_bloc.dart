@@ -16,6 +16,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   Fraction _currentInput = Fraction(0);
   Fraction? _result;
   String _operator = '';
+  String _expressionBuffer = '';
   int wholeNumberInput = 0;
   Fraction fractionalInput = Fraction(0);
   bool _isNewNumber = true;
@@ -41,6 +42,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   }
 
   void _onClear(ClearEvent event, Emitter<CalculatorState> emit) {
+    _expressionBuffer = '';
     _currentInput = Fraction(0);
     _result = null;
     _operator = '';
@@ -64,34 +66,38 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   void _onOperator(OperatorEvent event, Emitter<CalculatorState> emit) {
     if (_result == null) {
       _result = _currentInput;
+      _expressionBuffer = formatFraction.execute(_currentInput);
     } else if (_operator.isNotEmpty) {
       _result = calculate.execute(_result!, _currentInput, _operator);
+      _expressionBuffer +='${formatFraction.execute(_currentInput)}';
     }
 
     _operator = event.operator;
-    _updateExpression(emit);
+    _expressionBuffer += ' $_operator';
+    emit(state.copyWith(
+      expression: _expressionBuffer,
+    ));
     _resetInput();
   }
 
   void _onEquals(EqualsEvent event, Emitter<CalculatorState> emit) {
     if (_result != null && _operator.isNotEmpty) {
-      final result = calculate.execute(_result!, _currentInput, _operator);
-      final formattedResult = formatFraction.execute(result);
+      _result = calculate.execute(_result!, _currentInput, _operator);
 
       emit(state.copyWith(
-        displayText: formattedResult,
-        inchResult: "$formattedResult inches",
-        feetInchResult: convertUnits.execute(result),
-        expression: "${state.expression} ${formatFraction.execute(_currentInput)} = $formattedResult",
+        expression: '$_expressionBuffer ${formatFraction.execute(_currentInput)} = ${formatFraction.execute(_result!)}',
+        displayText: formatFraction.execute(_result!),
+        inchResult: "...",
+        feetInchResult: "...",
       ));
 
-      _result = result;
-      _currentInput = result;
+      // Reset buffers
+      _expressionBuffer = '';
+      _result = null;
       _operator = '';
       _isNewNumber = true;
     }
   }
-
   void _onDigit(DigitEvent event, Emitter<CalculatorState> emit) {
     if (_isNewNumber) {
       wholeNumberInput = 0;

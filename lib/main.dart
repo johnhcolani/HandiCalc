@@ -7,7 +7,6 @@ import 'features/calculator/domain/usecases/format_fraction_use_case.dart';
 import 'features/calculator/domain/usecases/parse_fraction_use_case.dart';
 import 'features/calculator/presentation/blocs/calculator_bloc.dart';
 import 'features/splash_feature/presentation/bloc/splash_bloc.dart';
-import 'fraction_calculator_screen.dart';
 
 void main() => runApp(const CalculatorApp());
 

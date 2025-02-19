@@ -21,10 +21,10 @@ class FractionCalculatorScreen extends StatelessWidget {
             style: TextStyle(color: Colors.grey.shade300),
           ),
         ),
-        // leading: IconButton(
-        //   icon: const Icon(Icons.more_vert, color: Colors.white),
-        //   onPressed: () {},
-        // ),
+        leading: IconButton(
+          icon: const Icon(Icons.more_vert, color: Colors.white),
+          onPressed: () {},
+        ),
       ),
       body: BlocBuilder<CalculatorBloc, CalculatorState>(
         builder: (context, state) {

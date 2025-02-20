@@ -80,20 +80,23 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     _resetInput();
   }
 
+  // In CalculatorBloc
   void _onEquals(EqualsEvent event, Emitter<CalculatorState> emit) {
     if (_result != null && _operator.isNotEmpty) {
-      _result = calculate.execute(_result!, _currentInput, _operator);
+      final result = calculate.execute(_result!, _currentInput, _operator);
+      final formattedResult = formatFraction.execute(result);
+      final inchResult = "$formattedResult inches";
+      final feetInchResult = convertUnits.execute(result);
 
       emit(state.copyWith(
-        expression: '$_expressionBuffer ${formatFraction.execute(_currentInput)} = ${formatFraction.execute(_result!)}',
-        displayText: formatFraction.execute(_result!),
-        inchResult: "...",
-        feetInchResult: "...",
+        displayText: formattedResult,
+        inchResult: inchResult,
+        feetInchResult: feetInchResult,
+        expression: "${state.expression} ${formatFraction.execute(_currentInput)} = $formattedResult",
       ));
 
-      // Reset buffers
-      _expressionBuffer = '';
-      _result = null;
+      _result = result;
+      _currentInput = result;
       _operator = '';
       _isNewNumber = true;
     }

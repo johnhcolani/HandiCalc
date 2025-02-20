@@ -2,21 +2,21 @@ import 'package:fraction/fraction.dart';
 
 class ConvertUnitsUseCase {
   String execute(Fraction inches) {
-    final isNegative = inches.numerator < 0;
-    final absoluteInches = Fraction(
-      inches.numerator.abs(),
-      inches.denominator,
-    ).reduce();
+    try {
+      final isNegative = inches.numerator < 0;
+      final absolute = Fraction(inches.numerator.abs(), inches.denominator).reduce();
 
-    final totalInches = absoluteInches.toDouble().truncate();
-    final feet = totalInches ~/ 12;
-    final remainingInches = absoluteInches - Fraction(feet * 12);
+      final totalInches = absolute.toDouble();
+      final feet = (totalInches / 12).truncate();
+      final remainingInches = absolute - Fraction(feet * 12);
 
-    final sign = isNegative ? "-" : "";
-    final feetStr = feet > 0 ? "$feet ft " : (isNegative ? "0 ft " : "");
-    final inchesStr = "${_formatFraction(remainingInches)} in";
+      final feetStr = feet > 0 ? "$feet ft " : "";
+      final inchesStr = "${_formatFraction(remainingInches)} in";
 
-    return "$sign$feetStr$inchesStr";
+      return "${isNegative ? "-" : ""}$feetStr$inchesStr";
+    } catch (e) {
+      return "0 in";
+    }
   }
 
   String _formatFraction(Fraction fraction) {

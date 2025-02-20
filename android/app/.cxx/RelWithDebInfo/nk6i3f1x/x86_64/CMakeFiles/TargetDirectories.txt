@@ -1,0 +1,2 @@
+/Users/johncolani/flutter_project_oct_24/handi_calc/android/app/.cxx/RelWithDebInfo/nk6i3f1x/x86_64/CMakeFiles/edit_cache.dir
+/Users/johncolani/flutter_project_oct_24/handi_calc/android/app/.cxx/RelWithDebInfo/nk6i3f1x/x86_64/CMakeFiles/rebuild_cache.dir

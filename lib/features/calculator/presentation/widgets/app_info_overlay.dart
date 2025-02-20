@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
+import 'package:handi_calc/features/calculator/presentation/widgets/service_banner.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppInfoOverlay extends StatefulWidget {
@@ -16,6 +17,18 @@ class _AppInfoOverlayState extends State<AppInfoOverlay>
 
   final List<AppItem> _apps = [
     AppItem(
+    name: 'Absolute Stone Design',
+    iconPath: 'assets/icons/absolute.png',
+    androidUrl: 'https://play.google.com/store/apps/details?id=com.JohnColani.asdapp',
+    iosUrl: 'https://apps.apple.com/us/app/asdusa/id1588331742?platform=iphone',
+  ),
+    AppItem(
+      name: 'Phillips Rear-VU',
+      iconPath: 'assets/icons/phillips.png',
+      androidUrl: 'https://play.google.com/store/apps/details?id=com.phillipsind.phillips_rear_vu_mobile_app',
+      iosUrl: 'https://apps.apple.com/us/app/phillips-rear-vu/id1669085162',
+    ),
+    AppItem(
       name: 'Infinite Note Plus',
       iconPath: 'assets/icons/note.png',
       androidUrl: 'https://play.google.com/store/apps/details?id=com.johncolani.greate_note_app',
@@ -26,6 +39,19 @@ class _AppInfoOverlayState extends State<AppInfoOverlay>
       iconPath: 'assets/icons/scripture.png',
       androidUrl: 'https://play.google.com/store/apps/details?id=com.johncolani.twin.scripture',
       iosUrl: 'https://apps.apple.com/app/twin-scriptures/id6740755381',
+    ),
+
+    AppItem(
+      name: 'Solomon Prayers Compass',
+      iconPath: 'assets/icons/temple.png',
+      androidUrl: 'https://apps.apple.com/app/solomon-prayers-compass/id6670187898',
+      iosUrl: 'https://apps.apple.com/app/solomon-prayers-compass/id6670187898',
+    ),
+    AppItem(
+      name: 'Dream Whisperer',
+      iconPath: 'assets/icons/dream.png',
+      androidUrl: 'https://apps.apple.com/us/app/dream-whisperer/id6547866253?platform=iphone',
+      iosUrl: 'https://apps.apple.com/us/app/dream-whisperer/id6547866253?platform=iphone',
     ),
     // Add 4 more apps here
   ];
@@ -90,8 +116,23 @@ class _AppInfoOverlayState extends State<AppInfoOverlay>
                     borderRadius: BorderRadius.circular(20),
                     child: Column(
                       children: [
+                        ServiceAdBanner(),
+
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                                height: 120,
+                                width: 120,
+                                child: Image.asset("assets/images/Melody.jpg",fit: BoxFit.cover,)),
+                          ),
+                        ),
                         const Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: EdgeInsets.all(8.0),
                           child: Text(
                             'My Applications',
                             style: TextStyle(
@@ -101,19 +142,7 @@ class _AppInfoOverlayState extends State<AppInfoOverlay>
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                                height: 150,
-                                width: 150,
-                                child: Image.asset("assets/images/Melody.jpg",fit: BoxFit.cover,)),
-                          ),
-                        ),
+
                         Expanded(
                           child: ListView.builder(
                             shrinkWrap: true,

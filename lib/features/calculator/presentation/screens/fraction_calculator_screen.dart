@@ -5,6 +5,7 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import '../blocs/calculator_bloc.dart';
 import '../blocs/calculator_event.dart';
 import '../blocs/calculator_state.dart';
+import '../widgets/app_info_overlay.dart';
 
 class FractionCalculatorScreen extends StatelessWidget {
   const FractionCalculatorScreen({super.key});
@@ -23,7 +24,12 @@ class FractionCalculatorScreen extends StatelessWidget {
         ),
         leading: IconButton(
           icon: const Icon(Icons.more_vert, color: Colors.white),
-          onPressed: () {},
+          onPressed: () => showDialog(
+    context: context,
+    builder: (context) => const AppInfoOverlay(),
+    barrierColor: Colors.transparent,
+            ),
+          
         ),
       ),
       body: BlocBuilder<CalculatorBloc, CalculatorState>(

@@ -101,6 +101,19 @@ class _AppInfoOverlayState extends State<AppInfoOverlay>
                             ),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                                height: 150,
+                                width: 150,
+                                child: Image.asset("assets/images/Melody.jpg",fit: BoxFit.cover,)),
+                          ),
+                        ),
                         Expanded(
                           child: ListView.builder(
                             shrinkWrap: true,

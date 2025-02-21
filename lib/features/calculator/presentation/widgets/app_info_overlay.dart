@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_borders/gradient_borders.dart';
@@ -244,16 +246,17 @@ class _AppListItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _PlatformButton(
+              Platform.isAndroid ?  _PlatformButton(
                   icon: Icons.android,
                   label: 'Android',
                   onTap: onAndroidTap,
-                ),
+                ): Platform.isIOS ?
                 _PlatformButton(
                   icon: Icons.phone_iphone,
                   label: 'iOS',
                   onTap: onIosTap,
-                ),
+                ): Container(),
+
               ],
             ),
           ),

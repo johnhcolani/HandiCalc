@@ -15,26 +15,26 @@ class ServiceAdBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.all(10.w),
+      padding:  EdgeInsets.all(8.w),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(
-          padding:  EdgeInsets.all(10.w),
+          padding:  EdgeInsets.all(8.w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.developer_mode, size: 30.w, color: Colors.blue),
-              SizedBox(height: 10.h),
-              Text(
-                "🚀 Mobile & Desktop App Development",
-                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
+              Icon(Icons.developer_mode, size: 24.w, color: Colors.blue),
               SizedBox(height: 8.h),
               Text(
+                "🚀 Mobile & Desktop App Development",
+                style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 6.h),
+              Text(
                 "iOS, Android, Windows, macOS, Linux with Flutter - Single Codebase!",
-                style: TextStyle(fontSize: 12.sp),
+                style: TextStyle(fontSize: 10.sp),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 12),
@@ -43,15 +43,15 @@ class ServiceAdBanner extends StatelessWidget {
                 children: [
                   ElevatedButton.icon(
                     onPressed: () => _launchURL("mailto:your_email@example.com"), // Email link
-                    icon:  Icon(Icons.email,size: 16.w,),
+                    icon:  Icon(Icons.email,size: 14.w,),
                     label:  Text("Contact Me",style: TextStyle(fontSize: 12.sp),),
                   ),
                   const SizedBox(width: 10), // Spacing between buttons
                   IconButton(
                     onPressed: () => _launchURL("https://www.linkedin.com/in/john-colani-43344a70/"), // LinkedIn profile
                     icon:  SizedBox(
-                        height: 25.h,
-                        width: 25.w,
+                        height: 20.h,
+                        width: 20.w,
                         child: Image.asset("assets/icons/linkedin.png")),
 
                     // style: ElevatedButton.styleFrom(

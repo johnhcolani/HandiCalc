@@ -21,11 +21,11 @@ class FractionCalculatorScreen extends StatelessWidget {
         title: Center(
           child: Text(
             'Fraction Flow',
-            style: TextStyle(color: Colors.grey.shade300,fontSize: 20.sp),
+            style: TextStyle(color: Colors.grey.shade300,fontSize: 16.sp),
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.white,size: 24.dm,),
+          icon: Icon(Icons.menu, color: Colors.white,size: 18.dm,),
           onPressed: () => showDialog(
             context: context,
             builder: (context) => const AppInfoOverlay(),
@@ -51,27 +51,27 @@ class FractionCalculatorScreen extends StatelessWidget {
 
   Widget _buildDisplaySection(BuildContext context, CalculatorState state) {
     return Padding(
-      padding:  EdgeInsets.all(8.h),
+      padding:  EdgeInsets.all(6.h),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.blue.withValues(red: 0.2,blue: 1,green: 1,alpha: 0.1),
           border: GradientBoxBorder(
-            width: 2.dm,
+            width: 1.dm,
             gradient: LinearGradient(colors: [
               Colors.blue.shade300,
               Colors.purple.shade300
             ]),
           ),
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         child: Column(
           children: [
             Container(
               alignment: Alignment.centerRight,
-              padding:  EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
+              padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
               child: Text(state.expression,
                   style: TextStyle(
-                      fontSize: 24.sp,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey[300])),
             ),
@@ -80,7 +80,7 @@ class FractionCalculatorScreen extends StatelessWidget {
               padding:  EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
               child: Text(state.displayText,
                   style:  TextStyle(
-                      fontSize: 24.sp,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white)),
             ),
@@ -97,7 +97,7 @@ class FractionCalculatorScreen extends StatelessWidget {
         children: [
           Expanded(child: _buildResultContainer("in", state.inchResult, Color(
               0xFFC7ADD5))),
-          SizedBox(width: 8.r),
+          SizedBox(width: 4.r),
           Expanded(child: _buildResultContainer("ft", state.feetInchResult, Colors.white)),
         ],
       ),
@@ -106,19 +106,19 @@ class FractionCalculatorScreen extends StatelessWidget {
 
   Widget _buildResultContainer(String label, String result, Color textColor) {
     return Padding(
-      padding:  EdgeInsets.all(8.w),
+      padding:  EdgeInsets.all(6.w),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.blue.withValues(red: .01,blue: 2,green: 1,alpha: 0.1),
           border: Border.all(color: Colors.grey, width: 2.w),
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+          padding:  EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(label, style:  TextStyle(color: Colors.white,fontSize: 14.sp)),
+              Text(label, style:  TextStyle(color: Colors.white,fontSize: 12.sp)),
 
               // Auto-scale font to fit within the container
               Expanded(
@@ -127,7 +127,7 @@ class FractionCalculatorScreen extends StatelessWidget {
                   child: Text(
                     result,
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.bold,
                       color: textColor,
                     ),
@@ -144,7 +144,7 @@ class FractionCalculatorScreen extends StatelessWidget {
   Widget _buildCalculatorButtons(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
+        padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
         child: Column(
           children: [
             _buildOperatorRow(["C", "±", "%", "÷"]),

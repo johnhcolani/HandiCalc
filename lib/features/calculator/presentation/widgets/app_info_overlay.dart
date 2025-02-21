@@ -234,13 +234,13 @@ class _AppListItem extends StatelessWidget {
               app.name,
               style:  TextStyle(
                 color: Colors.white,
-                fontSize: 12.sp,
+                fontSize: 10.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),
           ),
           Padding(
-            padding:  EdgeInsets.all(8.h),
+            padding:  EdgeInsets.all(6.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -279,7 +279,7 @@ class _PlatformButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        padding:  EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           gradient: const LinearGradient(
@@ -290,13 +290,13 @@ class _PlatformButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, color: Colors.white, size: 16.r),
-            SizedBox(width: 8.w),
+            Icon(icon, color: Colors.white, size: 14.r),
+            SizedBox(width: 6.w),
             Text(
               label,
               style:  TextStyle(
                 color: Colors.white,
-                fontSize: 12.sp,
+                fontSize: 10.sp,
               ),
             ),
           ],

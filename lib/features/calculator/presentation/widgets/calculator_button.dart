@@ -23,7 +23,7 @@ class CalculatorButton extends StatelessWidget {
 
     return Expanded(
       child: Padding(
-        padding:  EdgeInsets.all(4.w),
+        padding:  EdgeInsets.all(3.w),
         child: Container(
           decoration: BoxDecoration(
             border: GradientBoxBorder(
@@ -33,7 +33,7 @@ class CalculatorButton extends StatelessWidget {
                 Colors.purple.shade300
               ]),
             ),
-            borderRadius: BorderRadius.circular(24.r),
+            borderRadius: BorderRadius.circular(16.r),
             color: colors.backgroundColor,
           ),
           child: ElevatedButton(
@@ -42,7 +42,7 @@ class CalculatorButton extends StatelessWidget {
               backgroundColor: colors.backgroundColor,
               padding: _getPadding(),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(24.r)),
+                  borderRadius: BorderRadius.circular(16.r)),
               elevation: 2,
             ),
             child: Text(text,
@@ -95,7 +95,7 @@ class CalculatorButton extends StatelessWidget {
     );
   }
 
-  double _getTextSize() => isFraction ? 14.sp : 14.sp;
+  double _getTextSize() => isFraction ? 10.sp : 10.sp;
 
   EdgeInsets _getPadding() => isFraction
       ?  EdgeInsets.symmetric(vertical: 8.h)

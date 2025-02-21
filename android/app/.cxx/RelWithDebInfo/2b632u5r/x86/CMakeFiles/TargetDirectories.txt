@@ -1,0 +1,2 @@
+C:/All Apps/HandiCalc/android/app/.cxx/RelWithDebInfo/2b632u5r/x86/CMakeFiles/edit_cache.dir
+C:/All Apps/HandiCalc/android/app/.cxx/RelWithDebInfo/2b632u5r/x86/CMakeFiles/rebuild_cache.dir

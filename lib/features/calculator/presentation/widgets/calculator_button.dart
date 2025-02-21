@@ -95,7 +95,7 @@ class CalculatorButton extends StatelessWidget {
     );
   }
 
-  double _getTextSize() => isFraction ? 10.sp : 10.sp;
+  double _getTextSize() => isFraction ? 14.sp : 14.sp;
 
   EdgeInsets _getPadding() => isFraction
       ?  EdgeInsets.symmetric(vertical: 8.h)

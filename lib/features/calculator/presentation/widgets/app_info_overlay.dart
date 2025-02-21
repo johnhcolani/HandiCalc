@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:handi_calc/features/calculator/presentation/widgets/service_banner.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,11 +18,11 @@ class _AppInfoOverlayState extends State<AppInfoOverlay>
 
   final List<AppItem> _apps = [
     AppItem(
-    name: 'Absolute Stone Design',
-    iconPath: 'assets/icons/absolute.png',
-    androidUrl: 'https://play.google.com/store/apps/details?id=com.JohnColani.asdapp',
-    iosUrl: 'https://apps.apple.com/us/app/asdusa/id1588331742?platform=iphone',
-  ),
+      name: 'Absolute Stone Design',
+      iconPath: 'assets/icons/absolute.png',
+      androidUrl: 'https://play.google.com/store/apps/details?id=com.JohnColani.asdapp',
+      iosUrl: 'https://apps.apple.com/us/app/asdusa/id1588331742?platform=iphone',
+    ),
     AppItem(
       name: 'Phillips Rear-VU',
       iconPath: 'assets/icons/phillips.png',
@@ -100,10 +101,10 @@ class _AppInfoOverlayState extends State<AppInfoOverlay>
                     maxWidth: size.width * 0.8,
                     maxHeight: size.height * 0.8,
                   ),
-                  margin: const EdgeInsets.only(top: 50),
-                  decoration: const BoxDecoration(
+                  margin:  EdgeInsets.only(top: 50.h),
+                  decoration:  BoxDecoration(
                     color: Color(0xFF191818),
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.all(Radius.circular(20.r)),
                     border: GradientBoxBorder(
                       gradient: LinearGradient(colors: [
                         Colors.blueAccent,
@@ -113,31 +114,31 @@ class _AppInfoOverlayState extends State<AppInfoOverlay>
                     ),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(20.r),
                     child: Column(
                       children: [
                         ServiceAdBanner(),
 
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
+                          padding:  EdgeInsets.only(bottom: 8.h),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(16.r),
                             child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                                height: 120,
-                                width: 120,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16.r),
+                                ),
+                                height: 100.h,
+                                width: 100.w,
                                 child: Image.asset("assets/images/Melody.jpg",fit: BoxFit.cover,)),
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
+                        Padding(
+                          padding: EdgeInsets.all(8.h),
                           child: Text(
                             'My Applications',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 22,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -197,49 +198,49 @@ class _AppListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        border: const GradientBoxBorder(
+        borderRadius: BorderRadius.circular(15.r),
+        border:  GradientBoxBorder(
           gradient: LinearGradient(colors: [
             Colors.blueAccent,
             Colors.purpleAccent
           ]),
-          width: 1,
+          width: 1.r,
         ),
       ),
       child: Column(
         children: [
           ListTile(
             leading: Container(
-              width: 50,
-              height: 50,
+              width: 60,
+              height: 60,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(8.r),
                 image: DecorationImage(
                   image: AssetImage(app.iconPath),
                   fit: BoxFit.cover,
                 ),
-                border: const GradientBoxBorder(
+                border:  GradientBoxBorder(
                   gradient: LinearGradient(colors: [
                     Colors.blue,
                     Colors.purple
                   ]),
-                  width: 1.5,
+                  width: 1.r,
                 ),
               ),
             ),
             title: Text(
               app.name,
-              style: const TextStyle(
+              style:  TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.all(8.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -278,7 +279,7 @@ class _PlatformButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           gradient: const LinearGradient(
@@ -289,13 +290,13 @@ class _PlatformButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(icon, color: Colors.white, size: 20),
-            const SizedBox(width: 8),
+            Icon(icon, color: Colors.white, size: 16.r),
+            SizedBox(width: 8.w),
             Text(
               label,
-              style: const TextStyle(
+              style:  TextStyle(
                 color: Colors.white,
-                fontSize: 14,
+                fontSize: 12.sp,
               ),
             ),
           ],

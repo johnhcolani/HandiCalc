@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';  // Import Lottie package
 import 'package:handi_calc/features/splash_feature/presentation/bloc/splash_bloc.dart';
 import 'package:handi_calc/features/splash_feature/presentation/bloc/splash_event.dart';
@@ -36,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
         backgroundColor: const Color(0xFF191818FF),
         body: Center(
           child: SizedBox(
-            width: 350,
+            width: 250.w,
             child: Lottie.asset(
               'assets/images/splash.json', // Path to your Lottie JSON
               fit: BoxFit.cover,

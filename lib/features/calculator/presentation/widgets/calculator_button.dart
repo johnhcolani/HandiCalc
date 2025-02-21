@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import '../blocs/calculator_bloc.dart';
 import '../blocs/calculator_event.dart';
 
@@ -9,6 +11,7 @@ class CalculatorButton extends StatelessWidget {
   final bool isFraction;
 
   const CalculatorButton({
+    super.key,
     required this.text,
     this.isOperator = false,
     this.isFraction = false,
@@ -16,26 +19,38 @@ class CalculatorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = _getButtonColors();
+    final colors = _getButtonColors(context);
 
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: colors.backgroundColor,
-            foregroundColor: colors.textColor,
-            textStyle: TextStyle(
-              fontSize: _getTextSize(),
-              fontWeight: FontWeight.bold,
+        padding:  EdgeInsets.all(4.w),
+        child: Container(
+          decoration: BoxDecoration(
+            border: GradientBoxBorder(
+              width: 1.r,
+              gradient: LinearGradient(colors: [
+                Colors.blue.shade300,
+                Colors.purple.shade300
+              ]),
             ),
-            padding: const EdgeInsets.all(20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24),
-            ),
+            borderRadius: BorderRadius.circular(24.r),
+            color: colors.backgroundColor,
           ),
-          onPressed: () => _handlePress(context),
-          child: Text(text),
+          child: ElevatedButton(
+            onPressed: () => _handlePress(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: colors.backgroundColor,
+              padding: _getPadding(),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.r)),
+              elevation: 2,
+            ),
+            child: Text(text,
+                style: TextStyle(
+                    fontSize: _getTextSize(),
+                    fontWeight: FontWeight.bold,
+                    color: colors.textColor)),
+          ),
         ),
       ),
     );
@@ -43,36 +58,46 @@ class CalculatorButton extends StatelessWidget {
 
   void _handlePress(BuildContext context) {
     final bloc = context.read<CalculatorBloc>();
+
     if (text == "C") {
       bloc.add(ClearEvent());
-    } else if (["×", "-", "+", "÷"].contains(text)) {
+    } else if (text == "±") {
+      bloc.add(NegateEvent());
+    } else if (text == "%") {
+      bloc.add(PercentEvent());
+    } else if (["÷", "×", "-", "+"].contains(text)) {
       bloc.add(OperatorEvent(text));
+    } else if (text == "=") {
+      bloc.add(EqualsEvent());
+    } else if (text.contains("/")) {
+      bloc.add(FractionEvent(text));
+    } else {
+      bloc.add(DigitEvent(text));
     }
-    // Add other event handlers
   }
 
-  double _getTextSize() {
-    if (isOperator) return 32;  // Increased size for operators
-    if (isFraction) return 16;
-    return 24;  // Default size for numbers
-  }
-
-  ({Color backgroundColor, Color textColor}) _getButtonColors() {
-    if (isOperator) {
+  ({Color backgroundColor, Color textColor}) _getButtonColors(BuildContext context) {
+    if (isOperator || ["×", "-", "+", "÷"].contains(text)) {
       return (
-      backgroundColor: const Color(0xFFFF9F0A), // Orange for operators
+      backgroundColor: const Color(0xFFFF9F0A),
       textColor: Colors.white
       );
     }
     if (isFraction) {
       return (
-      backgroundColor: const Color(0xFF575454), // Gray for fractions
+      backgroundColor: const Color(0xFF575454),
       textColor: Colors.white
       );
     }
     return (
-    backgroundColor: Colors.grey[850]!, // Dark gray for numbers
+    backgroundColor: Colors.grey[850]!,
     textColor: Colors.white
     );
   }
+
+  double _getTextSize() => isFraction ? 14.sp : 14.sp;
+
+  EdgeInsets _getPadding() => isFraction
+      ?  EdgeInsets.symmetric(vertical: 8.h)
+      :  EdgeInsets.all(10.w);
 }

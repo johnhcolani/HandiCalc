@@ -1,0 +1,2 @@
+/Users/johncolani/flutter_project_oct_24/HandiCalc/android/app/.cxx/Debug/5n586k5t/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/johncolani/flutter_project_oct_24/HandiCalc/android/app/.cxx/Debug/5n586k5t/armeabi-v7a/CMakeFiles/rebuild_cache.dir

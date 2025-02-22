@@ -211,56 +211,64 @@ class _AppListItem extends StatelessWidget {
           width: 1.r,
         ),
       ),
-      child: Column(
-        children: [
-          ListTile(
-            leading: Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
-                image: DecorationImage(
-                  image: AssetImage(app.iconPath),
-                  fit: BoxFit.cover,
-                ),
-                border:  GradientBoxBorder(
-                  gradient: LinearGradient(colors: [
-                    Colors.blue,
-                    Colors.purple
-                  ]),
-                  width: 1.r,
-                ),
-              ),
-            ),
-            title: Text(
-              app.name,
-              style:  TextStyle(
-                color: Colors.white,
-                fontSize: 10.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Padding(
-            padding:  EdgeInsets.all(6.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-              Platform.isAndroid ?  _PlatformButton(
-                  icon: Icons.android,
-                  label: 'Android',
-                  onTap: onAndroidTap,
-                ): Platform.isIOS ?
-                _PlatformButton(
-                  icon: Icons.phone_iphone,
-                  label: 'iOS',
-                  onTap: onIosTap,
-                ): Container(),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
 
-              ],
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: ListTile(
+                leading: Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.r),
+                    image: DecorationImage(
+                      image: AssetImage(app.iconPath),
+                      fit: BoxFit.cover,
+                    ),
+                    border:  GradientBoxBorder(
+                      gradient: LinearGradient(colors: [
+                        Colors.blue,
+                        Colors.purple
+                      ]),
+                      width: 1.r,
+                    ),
+                  ),
+                ),
+                title: Text(
+                  app.name,
+                  style:  TextStyle(
+                    color: Colors.white,
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding:  EdgeInsets.all(6.h),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                Platform.isAndroid ?  _PlatformButton(
+                    icon: Icons.android,
+                    label: 'Android',
+                    onTap: onAndroidTap,
+                  ): Platform.isIOS ?
+                  _PlatformButton(
+                    icon: Icons.phone_iphone,
+                    label: 'iOS',
+                    onTap: onIosTap,
+                  ): Container(),
+
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -281,28 +289,32 @@ class _PlatformButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        padding:  EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          gradient: const LinearGradient(
-            colors: [Colors.blueAccent, Colors.purpleAccent],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        child: Row(
-          children: [
-            Icon(icon, color: Colors.white, size: 14.r),
-            SizedBox(width: 6.w),
-            Text(
-              label,
-              style:  TextStyle(
-                color: Colors.white,
-                fontSize: 10.sp,
-              ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding:  EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            gradient: const LinearGradient(
+              colors: [Colors.blueAccent, Colors.purpleAccent],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-          ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, color: Colors.white, size: 14.r),
+              SizedBox(width: 6.w),
+              Text(
+                label,
+                style:  TextStyle(
+                  color: Colors.white,
+                  fontSize: 10.sp,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

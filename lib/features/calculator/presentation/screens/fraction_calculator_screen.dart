@@ -113,11 +113,9 @@ class FractionCalculatorScreen extends StatelessWidget {
 
   Widget _buildResultContainers(CalculatorState state) {
     return Padding(
-<<<<<<< HEAD
+
       padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w),
-=======
-      padding:  EdgeInsets.all(6.w),
->>>>>>> 5d0b52088e276fa6009c1ec4c7c4d8178e0eeb63
+
       child: Row(
         children: [
           Expanded(child: _buildResultContainer("ft", state.linearResult, Colors.white)),
@@ -133,11 +131,9 @@ class FractionCalculatorScreen extends StatelessWidget {
       padding: EdgeInsets.all(6.w),
       child: Container(
         decoration: BoxDecoration(
-<<<<<<< HEAD
+
           color: Colors.blue.withOpacity(0.1),
-=======
-          color: Colors.blue.withValues(red: .01, blue: 2, green: 1, alpha: 0.1),
->>>>>>> 5d0b52088e276fa6009c1ec4c7c4d8178e0eeb63
+
           border: Border.all(color: Colors.grey, width: 2.w),
           borderRadius: BorderRadius.circular(8.r),
         ),
@@ -146,11 +142,9 @@ class FractionCalculatorScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-<<<<<<< HEAD
+
               Text(label, style: TextStyle(color: Colors.white, fontSize: 12.sp)),
-=======
-              Text(label, style: TextStyle(color: Colors.white, fontSize: 14.sp)), // Scaled text
->>>>>>> 5d0b52088e276fa6009c1ec4c7c4d8178e0eeb63
+
               Expanded(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,

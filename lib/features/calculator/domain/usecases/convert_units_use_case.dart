@@ -1,31 +1,36 @@
 import 'package:fraction/fraction.dart';
 
 class ConvertUnitsUseCase {
-  String execute(Fraction inches) {
-    try {
-      final isNegative = inches.numerator < 0;
-      final absolute = Fraction(inches.numerator.abs(), inches.denominator).reduce();
+  String execute(Fraction inches, bool isSquare) {
+    if (isSquare) {
+      final totalSqIn = inches.toDouble();
+      final wholeSqFt = (totalSqIn / 144).floor();
+      final remainderSqIn = totalSqIn % 144;
 
-      final totalInches = absolute.toDouble();
-      final feet = (totalInches / 12).truncate();
-      final remainingInches = absolute - Fraction(feet * 12);
+      // Correctly compute decimal part using 144
+      final decimalPart = remainderSqIn / 144;
 
-      final feetStr = feet > 0 ? "$feet ft " : "";
-      final inchesStr = "${_formatFraction(remainingInches)} in";
+      // Format to 3 decimal places
+      final formattedDecimal = decimalPart.toStringAsFixed(3);
 
-      return "${isNegative ? "-" : ""}$feetStr$inchesStr";
-    } catch (e) {
-      return "0 in";
+      return "$wholeSqFt.${formattedDecimal.split('.')[1]} sq ft";
+    } else {
+      // Existing linear conversion
+      final totalInches = inches;
+      final wholeFeet = (totalInches / Fraction(12)).toDouble().truncate();
+      final remainderInches = totalInches - Fraction(wholeFeet * 12);
+
+      return "${wholeFeet.toInt()} ft ${formatFraction(remainderInches)} in";
     }
   }
 
-  String _formatFraction(Fraction fraction) {
+  String formatFraction(Fraction fraction) {
     fraction = fraction.reduce();
     final integerPart = fraction.toDouble().truncate();
     final fractionalPart = fraction - Fraction(integerPart);
 
-    return integerPart == 0 ?
-    fraction.toString() :
-    "$integerPart ${fractionalPart.toString()}";
+    return integerPart == 0
+        ? fraction.toString()
+        : "$integerPart ${fractionalPart.toString()}";
   }
 }

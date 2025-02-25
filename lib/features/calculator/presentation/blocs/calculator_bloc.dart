@@ -29,8 +29,8 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   }) : super(CalculatorState(
     displayText: '0',
     expression: '',
-    inchResult: '',
-    feetInchResult: '',
+    squareResult: '',
+    linearResult: '',
   )) {
     on<ClearEvent>(_onClear);
     on<NegateEvent>(_onNegate);
@@ -54,7 +54,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
       displayText: '0',
       expression: '',
       inchResult: '',
-      feetInchResult: '',
+      feetInchResult: '', linearResult: '', squareResult: '',
     ));
   }
 
@@ -75,7 +75,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     _operator = event.operator;
     _expressionBuffer += ' $_operator';
     emit(state.copyWith(
-      expression: _expressionBuffer,
+      expression: _expressionBuffer, linearResult: '', squareResult: '',
     ));
     _resetInput();
   }
@@ -85,21 +85,19 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     if (_result != null && _operator.isNotEmpty) {
       final result = calculate.execute(_result!, _currentInput, _operator);
       final formattedResult = formatFraction.execute(result);
-      final inchResult = "$formattedResult inches";
-      final feetInchResult = convertUnits.execute(result);
+
+      // Convert to both linear and square measurements
+      final linear = convertUnits.execute(result, false); // false for linear
+      final square = convertUnits.execute(result, true);  // true for square
 
       emit(state.copyWith(
         displayText: formattedResult,
-        inchResult: inchResult,
-        feetInchResult: feetInchResult,
+        linearResult: linear,
+        squareResult: square,
         expression: "${state.expression} ${formatFraction.execute(_currentInput)} = $formattedResult",
       ));
-
-      _result = result;
-      _currentInput = result;
-      _operator = '';
-      _isNewNumber = true;
     }
+
   }
   void _onDigit(DigitEvent event, Emitter<CalculatorState> emit) {
     if (_isNewNumber) {
@@ -128,13 +126,13 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
 
   void _updateDisplay(Emitter<CalculatorState> emit) {
     emit(state.copyWith(
-      displayText: formatFraction.execute(_currentInput),
+      displayText: formatFraction.execute(_currentInput), linearResult: '', squareResult: '',
     ));
   }
 
   void _updateExpression(Emitter<CalculatorState> emit) {
     emit(state.copyWith(
-      expression: "${formatFraction.execute(_result!)} $_operator",
+      expression: "${formatFraction.execute(_result!)} $_operator", linearResult: '', squareResult: '',
     ));
   }
 

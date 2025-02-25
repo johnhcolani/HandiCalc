@@ -92,13 +92,12 @@ class FractionCalculatorScreen extends StatelessWidget {
 
   Widget _buildResultContainers(CalculatorState state) {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w),
+      padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w),
       child: Row(
         children: [
-          Expanded(child: _buildResultContainer("in", state.inchResult, Color(
-              0xFFC7ADD5))),
+          Expanded(child: _buildResultContainer("ft", state.linearResult, Colors.white)),
           SizedBox(width: 4.r),
-          Expanded(child: _buildResultContainer("ft", state.feetInchResult, Colors.white)),
+          Expanded(child: _buildResultContainer("sq ft", state.squareResult, Color(0xFFC7ADD5))),
         ],
       ),
     );
@@ -106,24 +105,22 @@ class FractionCalculatorScreen extends StatelessWidget {
 
   Widget _buildResultContainer(String label, String result, Color textColor) {
     return Padding(
-      padding:  EdgeInsets.all(6.w),
+      padding: EdgeInsets.all(6.w),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.blue.withValues(red: .01,blue: 2,green: 1,alpha: 0.1),
+          color: Colors.blue.withOpacity(0.1),
           border: Border.all(color: Colors.grey, width: 2.w),
           borderRadius: BorderRadius.circular(8.r),
         ),
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(label, style:  TextStyle(color: Colors.white,fontSize: 12.sp)),
-
-              // Auto-scale font to fit within the container
+              Text(label, style: TextStyle(color: Colors.white, fontSize: 12.sp)),
               Expanded(
                 child: FittedBox(
-                  fit: BoxFit.scaleDown, // Scale text down if it overflows
+                  fit: BoxFit.scaleDown,
                   child: Text(
                     result,
                     style: TextStyle(

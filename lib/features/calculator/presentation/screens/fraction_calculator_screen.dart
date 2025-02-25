@@ -36,25 +36,38 @@ class FractionCalculatorScreen extends StatelessWidget {
       ),
       body: BlocBuilder<CalculatorBloc, CalculatorState>(
         builder: (context, state) {
-          return Column(
-            children: [
-              _buildDisplaySection(context, state),
-              _buildResultContainers(state),
-              _buildCalculatorButtons(context),
-              // _buildAdBanner(),
-            ],
-          );
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              double maxWidth = constraints.maxWidth > 600 ? constraints.maxWidth * 0.8 : constraints.maxWidth;
+
+              double maxHeight = constraints.maxHeight; // Get screen height
+              return Center(
+                child: Container(
+                  width: maxWidth,
+                  height: maxHeight, // Ensure it doesn't overflow
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
+                  child: Column(
+                    children: [
+                      _buildDisplaySection(context, state,constraints),
+                      _buildResultContainers(state),
+                      _buildScrollableCalculatorButtons(context),
+                      // _buildAdBanner(),
+                    ],
+                  ),
+                ),
+              );
+            });
         },
       ),
     );
   }
 
-  Widget _buildDisplaySection(BuildContext context, CalculatorState state) {
+  Widget _buildDisplaySection(BuildContext context, CalculatorState state, BoxConstraints constraints) {
     return Padding(
-      padding:  EdgeInsets.all(6.h),
+      padding: EdgeInsets.all(6.h),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.blue.withValues(red: 0.2,blue: 1,green: 1,alpha: 0.1),
+          color: Colors.blue.withValues(red: 0.2, blue: 1, green: 1, alpha: 0.1),
           border: GradientBoxBorder(
             width: 1.dm,
             gradient: LinearGradient(colors: [
@@ -68,21 +81,27 @@ class FractionCalculatorScreen extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.centerRight,
-              padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
-              child: Text(state.expression,
-                  style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[300])),
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+              child: Text(
+                state.expression,
+                style: TextStyle(
+                  fontSize: constraints.maxWidth > 600 ? 18.sp : 22.sp, // Smaller on tablets
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[300],
+                ),
+              ),
             ),
             Container(
               alignment: Alignment.centerRight,
-              padding:  EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
-              child: Text(state.displayText,
-                  style:  TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+              child: Text(
+                state.displayText,
+                style: TextStyle(
+                  fontSize: constraints.maxWidth > 600 ? 24.sp : 28.sp, // Scale for large screens
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         ),
@@ -90,9 +109,15 @@ class FractionCalculatorScreen extends StatelessWidget {
     );
   }
 
+
+
   Widget _buildResultContainers(CalculatorState state) {
     return Padding(
+<<<<<<< HEAD
       padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w),
+=======
+      padding:  EdgeInsets.all(6.w),
+>>>>>>> 5d0b52088e276fa6009c1ec4c7c4d8178e0eeb63
       child: Row(
         children: [
           Expanded(child: _buildResultContainer("ft", state.linearResult, Colors.white)),
@@ -108,7 +133,11 @@ class FractionCalculatorScreen extends StatelessWidget {
       padding: EdgeInsets.all(6.w),
       child: Container(
         decoration: BoxDecoration(
+<<<<<<< HEAD
           color: Colors.blue.withOpacity(0.1),
+=======
+          color: Colors.blue.withValues(red: .01, blue: 2, green: 1, alpha: 0.1),
+>>>>>>> 5d0b52088e276fa6009c1ec4c7c4d8178e0eeb63
           border: Border.all(color: Colors.grey, width: 2.w),
           borderRadius: BorderRadius.circular(8.r),
         ),
@@ -117,14 +146,18 @@ class FractionCalculatorScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+<<<<<<< HEAD
               Text(label, style: TextStyle(color: Colors.white, fontSize: 12.sp)),
+=======
+              Text(label, style: TextStyle(color: Colors.white, fontSize: 14.sp)), // Scaled text
+>>>>>>> 5d0b52088e276fa6009c1ec4c7c4d8178e0eeb63
               Expanded(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
                     result,
                     style: TextStyle(
-                      fontSize: 13.sp,
+                      fontSize: 18.sp, // Bigger on larger screens
                       fontWeight: FontWeight.bold,
                       color: textColor,
                     ),
@@ -138,18 +171,20 @@ class FractionCalculatorScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCalculatorButtons(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
+
+  Widget _buildScrollableCalculatorButtons(BuildContext context) {
+    return SizedBox(
+      height: 0.6.sh, // Max 60% of screen height to prevent overflow
+      child: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildOperatorRow(["C", "±", "%", "÷"]),
             _buildNumberRow(["7", "8", "9", "×"]),
             _buildNumberRow(["4", "5", "6", "-"]),
             _buildNumberRow(["1", "2", "3", "+"]),
             _buildBottomRow(),
-            _buildFractionRow(["1/4","3/4",]),
+            _buildFractionRow(["1/4", "3/4"]),
             _buildFractionRow(["1/8", "3/8", "5/8", "7/8"]),
             _buildFractionRow(["1/16", "3/16", "5/16", "7/16"]),
             _buildFractionRow(["9/16", "11/16", "13/16", "15/16"]),
@@ -158,6 +193,8 @@ class FractionCalculatorScreen extends StatelessWidget {
       ),
     );
   }
+
+
 
   Widget _buildOperatorRow(List<String> buttons) {
     return Row(

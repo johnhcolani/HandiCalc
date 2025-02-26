@@ -64,16 +64,50 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   }
 
   void _handleFraction(FractionEvent event, Emitter<CalculatorState> emit) {
-    _displayBuffer = event.fraction.replaceAll('"', ''); // Show "1/2" or "1 1/2" on display without quotes
-    // Ensure the full fraction/mixed number (e.g., "1/2", "1 1/2") is treated as a single token, with quotes if not already present
-    String quotedFraction = event.fraction.startsWith('"') && event.fraction.endsWith('"')
-        ? event.fraction
-        : '"${event.fraction}"';
-    if (_expressionBuffer.isEmpty || _expressionBuffer.endsWith(' ')) {
-      _expressionBuffer += quotedFraction;
-    } else {
-      _expressionBuffer += ' $quotedFraction';
+    String newFraction = event.fraction.replaceAll('"', '');
+    String quotedFraction;
+
+    // Check if the last part of the expression buffer is a whole number
+    String possibleNumber = '';
+    int i = _expressionBuffer.length - 1;
+
+    // Skip trailing spaces
+    while (i >= 0 && _expressionBuffer[i] == ' ') {
+      i--;
     }
+
+    // Extract the last contiguous digits
+    while (i >= 0 && _expressionBuffer[i].contains(RegExp(r'[0-9]'))) {
+      possibleNumber = _expressionBuffer[i] + possibleNumber;
+      i--;
+    }
+
+    if (possibleNumber.isNotEmpty) {
+      // Combine with the new fraction to form a mixed number
+      String mixedNumber = '$possibleNumber $newFraction';
+      _displayBuffer = mixedNumber;
+
+      // Replace the extracted number with the mixed number in quotes
+      int startIndex = i + 1;
+      _expressionBuffer = _expressionBuffer.substring(0, startIndex) +
+          '"$mixedNumber"'; // Ensure quotes are added here
+
+      // Add space before the quoted mixed number if needed
+      if (startIndex > 0 && _expressionBuffer[startIndex - 1] != ' ') {
+        _expressionBuffer = _expressionBuffer.substring(0, startIndex) +
+            ' ' +
+            _expressionBuffer.substring(startIndex);
+      }
+    } else {
+      _displayBuffer = newFraction;
+      quotedFraction = '"$newFraction"'; // Always wrap new fractions in quotes
+      if (_expressionBuffer.isEmpty || _expressionBuffer.endsWith(' ')) {
+        _expressionBuffer += quotedFraction;
+      } else {
+        _expressionBuffer += ' $quotedFraction';
+      }
+    }
+
     emit(state.copyWith(
       displayText: _displayBuffer,
       expression: _expressionBuffer,
@@ -206,7 +240,6 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   }
 
   List<String> _tokenize(String expression) {
-    // Custom tokenizer to preserve quoted mixed numbers and handle spaces correctly
     final List<String> tokens = [];
     String buffer = '';
     bool inQuotes = false;
@@ -214,8 +247,8 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     for (int i = 0; i < expression.length; i++) {
       final char = expression[i];
       if (char == '"') {
-        if (inQuotes && buffer.isNotEmpty) {
-          tokens.add(buffer);
+        if (inQuotes) {
+          tokens.add('"$buffer"'); // Add the quoted token
           buffer = '';
         }
         inQuotes = !inQuotes;

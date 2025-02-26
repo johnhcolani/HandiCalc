@@ -14,14 +14,14 @@ class CalculatorState {
   CalculatorState copyWith({
     String? displayText,
     String? expression,
-    String? inchResult,
-    String? feetInchResult, required String linearResult, required String squareResult,
+    String? linearResult,
+    String? squareResult,
   }) {
     return CalculatorState(
       displayText: displayText ?? this.displayText,
       expression: expression ?? this.expression,
-      linearResult: inchResult ?? linearResult,
-      squareResult: feetInchResult ?? squareResult,
+      linearResult: linearResult ?? this.linearResult,
+      squareResult: squareResult ?? this.squareResult,
     );
   }
 }

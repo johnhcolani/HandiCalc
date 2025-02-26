@@ -69,11 +69,17 @@ class CalculatorButton extends StatelessWidget {
       bloc.add(OperatorEvent(text));
     } else if (text == "=") {
       bloc.add(EqualsEvent());
+    } else if (text == "(") {
+      bloc.add(ParenthesisEvent(true));
+    } else if (text == ")") {
+      bloc.add(ParenthesisEvent(false));
     } else if (text.contains("/")) {
-      bloc.add(FractionEvent(text));
+      bloc.add(FractionEvent('"${text}"')); // Ensure fractions/mixed numbers are quoted (e.g., "1/2", "1 1/2")
     } else {
       bloc.add(DigitEvent(text));
     }
+
+    print('Button pressed: $text'); // Debug: Print the button text to verify
   }
 
   ({Color backgroundColor, Color textColor}) _getButtonColors(BuildContext context) {

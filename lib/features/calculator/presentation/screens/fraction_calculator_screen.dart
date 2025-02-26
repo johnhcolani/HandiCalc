@@ -178,7 +178,7 @@ class FractionCalculatorScreen extends StatelessWidget {
             _buildNumberRow(["4", "5", "6", "-"]),
             _buildNumberRow(["1", "2", "3", "+"]),
             _buildBottomRow(),
-            _buildFractionRow(["1/4", "3/4"]),
+            _buildFractionRow(["1/4", "3/4","(",")"]),
             _buildFractionRow(["1/8", "3/8", "5/8", "7/8"]),
             _buildFractionRow(["1/16", "3/16", "5/16", "7/16"]),
             _buildFractionRow(["9/16", "11/16", "13/16", "15/16"]),
@@ -210,7 +210,7 @@ class FractionCalculatorScreen extends StatelessWidget {
       children: [
         CalculatorButton(text: "0"),
         CalculatorButton(text: "1/2"),
-        CalculatorButton(text: "=", isOperator: true),
+         CalculatorButton(text: "=", isOperator: true),
       ],
     );
   }

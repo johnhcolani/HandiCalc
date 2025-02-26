@@ -35,8 +35,22 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
     on<EqualsEvent>(_handleEquals);
     on<NegateEvent>(_handleNegate);
     on<PercentEvent>(_handlePercent);
+    on<BackspaceEvent>(_handleBackspace);
   }
+  void _handleBackspace(BackspaceEvent event, Emitter<CalculatorState> emit) {
+    if (_expressionBuffer.isNotEmpty) {
+      // Remove the last character from both buffers
+      _expressionBuffer = _expressionBuffer.substring(0, _expressionBuffer.length - 1);
+      _displayBuffer = _displayBuffer.length > 1
+          ? _displayBuffer.substring(0, _displayBuffer.length - 1)
+          : '0';
 
+      emit(state.copyWith(
+        displayText: _displayBuffer,
+        expression: _expressionBuffer,
+      ));
+    }
+  }
   void _handleClear(ClearEvent event, Emitter<CalculatorState> emit) {
     _expressionBuffer = '';
     _displayBuffer = '0';
@@ -117,6 +131,7 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   }
 
   void _handleOperator(OperatorEvent event, Emitter<CalculatorState> emit) {
+    // Add operator with spaces to ensure tokenization works
     _expressionBuffer += ' ${event.operator} ';
     _displayBuffer = event.operator;
     emit(state.copyWith(

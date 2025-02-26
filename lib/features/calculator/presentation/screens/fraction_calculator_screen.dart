@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,10 +83,21 @@ class FractionCalculatorScreen extends StatelessWidget {
             Container(
               alignment: Alignment.centerRight,
               padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
-              child: Text(
+              constraints: BoxConstraints(
+                maxHeight: 80.h, // Increased height for 3-4 lines
+
+              ),
+              child: AutoSizeText(
                 state.expression,
+                maxLines: 2, // Allow up to 4 lines
+                minFontSize: 18.0.sp, // Smaller minimum size for longer expressions
+                stepGranularity: 0.5.sp, // Required for decimal font sizes
+                maxFontSize: constraints.maxWidth > 600 ? 16.sp : 20.sp, // Smaller than original
+                overflow: TextOverflow.clip,
+
+                textAlign: TextAlign.right,
                 style: TextStyle(
-                  fontSize: constraints.maxWidth > 600 ? 18.sp : 22.sp, // Smaller on tablets
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey[300],
                 ),
@@ -94,10 +106,19 @@ class FractionCalculatorScreen extends StatelessWidget {
             Container(
               alignment: Alignment.centerRight,
               padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
-              child: Text(
+              constraints: BoxConstraints(
+                maxHeight: 40.h, // Keep result display compact
+                minHeight: 28.h,
+              ),
+              child: AutoSizeText(
                 state.displayText,
+                maxLines: 2,
+                minFontSize: 24.sp,
+                stepGranularity: 0.5.sp,
+                maxFontSize: constraints.maxWidth > 600 ? 24.sp : 28.sp,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.right,
                 style: TextStyle(
-                  fontSize: constraints.maxWidth > 600 ? 24.sp : 28.sp, // Scale for large screens
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -108,7 +129,6 @@ class FractionCalculatorScreen extends StatelessWidget {
       ),
     );
   }
-
 
 
   Widget _buildResultContainers(CalculatorState state) {
@@ -210,6 +230,7 @@ class FractionCalculatorScreen extends StatelessWidget {
       children: [
         CalculatorButton(text: "0"),
         CalculatorButton(text: "1/2"),
+        CalculatorButton(text: "⌫", isOperator: true),
          CalculatorButton(text: "=", isOperator: true),
       ],
     );

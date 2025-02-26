@@ -65,8 +65,10 @@ class CalculatorButton extends StatelessWidget {
       bloc.add(NegateEvent());
     } else if (text == "%") {
       bloc.add(PercentEvent());
-    } else if (["÷", "×", "-", "+"].contains(text)) {
+    } else if (["÷", "×", "-", "+"].contains(text)) { // Removed "⌫" from here
       bloc.add(OperatorEvent(text));
+    } else if (text == "⌫") { // Added separate case for backspace
+      bloc.add(BackspaceEvent());
     } else if (text == "=") {
       bloc.add(EqualsEvent());
     } else if (text == "(") {
@@ -74,24 +76,23 @@ class CalculatorButton extends StatelessWidget {
     } else if (text == ")") {
       bloc.add(ParenthesisEvent(false));
     } else if (text.contains("/")) {
-      bloc.add(FractionEvent('"${text}"')); // Ensure fractions/mixed numbers are quoted (e.g., "1/2", "1 1/2")
+      bloc.add(FractionEvent('"${text}"'));
     } else {
       bloc.add(DigitEvent(text));
     }
-
-    print('Button pressed: $text'); // Debug: Print the button text to verify
   }
 
   ({Color backgroundColor, Color textColor}) _getButtonColors(BuildContext context) {
-    if (isOperator || ["×", "-", "+", "÷"].contains(text)) {
+    if (isOperator || ["×", "-", "+", "÷"].contains(text)) { // Removed "⌫"
       return (
       backgroundColor: const Color(0xFFFF9F0A),
       textColor: Colors.white
       );
     }
-    if (isFraction) {
+// Add a separate case for "⌫" if needed
+    if (text == "⌫") {
       return (
-      backgroundColor: const Color(0xFF575454),
+      backgroundColor: const Color(0xFFFF3B30), // Red color for backspace
       textColor: Colors.white
       );
     }

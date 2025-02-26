@@ -27,3 +27,4 @@ class ParenthesisEvent extends CalculatorEvent {
   final bool isOpen;
   ParenthesisEvent(this.isOpen);
 }
+class BackspaceEvent extends CalculatorEvent {}

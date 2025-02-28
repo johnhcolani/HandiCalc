@@ -23,7 +23,7 @@ class CalculatorButton extends StatelessWidget {
 
     return Expanded(
       child: Padding(
-        padding:  EdgeInsets.all(3.w),
+        padding:  EdgeInsets.all(2.w),
         child: Container(
           decoration: BoxDecoration(
             border: GradientBoxBorder(
@@ -102,7 +102,7 @@ class CalculatorButton extends StatelessWidget {
     );
   }
 
-  double _getTextSize() => isFraction ? 14.sp : 14.sp;
+  double _getTextSize() => isFraction ? 14.sp : 16.sp;
 
   EdgeInsets _getPadding() => isFraction
       ?  EdgeInsets.symmetric(vertical: 8.h)

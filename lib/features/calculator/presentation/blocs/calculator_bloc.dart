@@ -8,7 +8,7 @@ import 'calculator_event.dart';
 import 'calculator_state.dart';
 
 class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
-  final CalculateUseCase calculate;
+  final CalculatorUseCase calculate;
   final ConvertUnitsUseCase convertUnits;
   final FormatFractionUseCase formatFraction;
   final ParseFractionUseCase parseFraction;

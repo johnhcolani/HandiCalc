@@ -84,13 +84,13 @@ class FractionCalculatorScreen extends StatelessWidget {
               alignment: Alignment.centerRight,
               padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
               constraints: BoxConstraints(
-                maxHeight: 80.h, // Increased height for 3-4 lines
+                maxHeight: 60.h, // Increased height for 3-4 lines
 
               ),
               child: AutoSizeText(
                 state.expression,
                 maxLines: 2, // Allow up to 4 lines
-                minFontSize: 18.0.sp, // Smaller minimum size for longer expressions
+                minFontSize: 10.0.sp, // Smaller minimum size for longer expressions
                 stepGranularity: 0.5.sp, // Required for decimal font sizes
                 maxFontSize: constraints.maxWidth > 600 ? 16.sp : 20.sp, // Smaller than original
                 overflow: TextOverflow.clip,
@@ -113,7 +113,7 @@ class FractionCalculatorScreen extends StatelessWidget {
               child: AutoSizeText(
                 state.displayText,
                 maxLines: 2,
-                minFontSize: 24.sp,
+                minFontSize: 18.sp,
                 stepGranularity: 0.5.sp,
                 maxFontSize: constraints.maxWidth > 600 ? 24.sp : 28.sp,
                 overflow: TextOverflow.ellipsis,
@@ -138,7 +138,7 @@ class FractionCalculatorScreen extends StatelessWidget {
 
       child: Row(
         children: [
-          Expanded(child: _buildResultContainer("ft", state.linearResult, Colors.white)),
+          Expanded(child: _buildResultContainer("li ft", state.linearResult, Colors.white)),
           SizedBox(width: 4.r),
           Expanded(child: _buildResultContainer("sq ft", state.squareResult, Color(0xFFC7ADD5))),
         ],

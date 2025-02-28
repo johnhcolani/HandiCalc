@@ -17,7 +17,7 @@ class CalculatorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(360, 690), // Base mobile screen size
+        designSize: const Size(420, 700), // Base mobile screen size
         minTextAdapt: true, // Important to prevent LateInitializationError
         splitScreenMode: true,
         builder: (context, child) {
@@ -27,7 +27,7 @@ class CalculatorApp extends StatelessWidget {
               BlocProvider(
                 create: (context) =>
                     CalculatorBloc(
-                      calculate: CalculateUseCase(),
+                      calculate: CalculatorUseCase(),
                       convertUnits: ConvertUnitsUseCase(),
                       formatFraction: FormatFractionUseCase(),
                       parseFraction: ParseFractionUseCase(),

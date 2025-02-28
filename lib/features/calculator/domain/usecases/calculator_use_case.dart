@@ -1,6 +1,6 @@
 import 'package:fraction/fraction.dart';
 
-class CalculateUseCase {
+class CalculatorUseCase {
   Fraction execute(Fraction num1, Fraction num2, String operator) {
     final result = switch (operator) {
       "+" => num1 + num2,

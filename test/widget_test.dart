@@ -16,7 +16,7 @@ import 'package:handi_calc/features/calculator/domain/usecases/parse_fraction_us
 import 'package:handi_calc/main.dart';
 
 void main() {
-  final calculate = CalculateUseCase();
+  final calculate = CalculatorUseCase();
   final format = FormatFractionUseCase();
 
   test('Adding 3/8 + 1/8', () {

@@ -188,7 +188,7 @@ class FractionCalculatorScreen extends StatelessWidget {
 
   Widget _buildScrollableCalculatorButtons(BuildContext context) {
     return SizedBox(
-      height: 0.6.sh, // Max 60% of screen height to prevent overflow
+      height: 0.65.sh, // Max 60% of screen height to prevent overflow
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -226,12 +226,22 @@ class FractionCalculatorScreen extends StatelessWidget {
   }
 
   Widget _buildBottomRow() {
-    return const Row(
+    return Column(
       children: [
-        CalculatorButton(text: "0"),
-        CalculatorButton(text: "1/2"),
-        CalculatorButton(text: "⌫", isOperator: true),
-         CalculatorButton(text: "=", isOperator: true),
+        Row(
+          children: [
+            CalculatorButton(text: "0"),
+            CalculatorButton(text: "1/2"),
+            CalculatorButton(text: "⌫", isOperator: true),
+          ],
+        ),
+        const Row(
+          children: [
+
+
+             CalculatorButton(text: "=", isOperator: true),
+          ],
+        ),
       ],
     );
   }

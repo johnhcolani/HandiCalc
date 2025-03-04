@@ -102,7 +102,14 @@ class CalculatorButton extends StatelessWidget {
     );
   }
 
-  double _getTextSize() => isFraction ? 14.sp : 16.sp;
+  double _getTextSize() {
+    if (["×", "-", "+", "÷","="].contains(text)) {
+      return 24.sp; // Make these specific operators even bigger
+    } else if (isFraction) {
+      return 14.sp;
+    }
+    return 16.sp;
+  }
 
   EdgeInsets _getPadding() => isFraction
       ?  EdgeInsets.symmetric(vertical: 8.h)

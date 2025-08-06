@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:handi_calc/features/calculator/presentation/widgets/service_banner.dart';
+import 'package:handi_calc/features/calculator/presentation/screens/purchase_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppInfoOverlay extends StatefulWidget {
@@ -134,6 +135,51 @@ class _AppInfoOverlayState extends State<AppInfoOverlay>
                                 child: Image.asset("assets/images/Melody.jpg",fit: BoxFit.cover,)),
                           ),
                         ),
+                        
+                        // Remove Ads Button
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context); // Close overlay first
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const PurchaseScreen()),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(12.h),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.r),
+                                gradient: const LinearGradient(
+                                  colors: [Colors.orange, Colors.deepOrange],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.block,
+                                    color: Colors.white,
+                                    size: 20.sp,
+                                  ),
+                                  SizedBox(width: 8.w),
+                                  Text(
+                                    'Remove Ads - Go Pro!',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        
                         Padding(
                           padding: EdgeInsets.all(8.h),
                           child: Text(

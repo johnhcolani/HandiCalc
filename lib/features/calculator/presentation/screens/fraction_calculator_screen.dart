@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:handi_calc/core/ads/ad_banner_widget.dart';
 
 import '../blocs/calculator_bloc.dart';
 import '../blocs/calculator_event.dart';
 import '../blocs/calculator_state.dart';
 import '../widgets/app_info_overlay.dart';
 import '../widgets/calculator_button.dart';
+import 'purchase_screen.dart';
 
 class FractionCalculatorScreen extends StatelessWidget {
   const FractionCalculatorScreen({super.key});
@@ -51,8 +53,10 @@ class FractionCalculatorScreen extends StatelessWidget {
                     children: [
                       _buildDisplaySection(context, state,constraints),
                       _buildResultContainers(state),
-                      _buildScrollableCalculatorButtons(context),
-                      // _buildAdBanner(),
+                      Expanded(
+                        child: _buildScrollableCalculatorButtons(context),
+                      ),
+                      _buildAdBanner(context),
                     ],
                   ),
                 ),
@@ -187,9 +191,7 @@ class FractionCalculatorScreen extends StatelessWidget {
 
 
   Widget _buildScrollableCalculatorButtons(BuildContext context) {
-    return SizedBox(
-      height: 0.60.sh, // Reduce height to prevent overflow
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -204,7 +206,6 @@ class FractionCalculatorScreen extends StatelessWidget {
             _buildFractionRow(["9/16", "11/16", "13/16", "15/16"]),
           ],
         ),
-      ),
     );
   }
 
@@ -245,6 +246,55 @@ class FractionCalculatorScreen extends StatelessWidget {
         text: text,
         isFraction: true,
       )).toList(),
+    );
+  }
+
+  Widget _buildAdBanner(BuildContext context) {
+    return Column(
+      children: [
+        // Real AdMob Banner
+        Container(
+          margin: EdgeInsets.only(top: 8.h),
+          child: const AdBannerWidget(),
+        ),
+        // Remove Ads Option
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PurchaseScreen()),
+            );
+          },
+          child: Container(
+            margin: EdgeInsets.only(top: 4.h),
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+            decoration: BoxDecoration(
+              color: Colors.grey[900],
+              borderRadius: BorderRadius.circular(6.r),
+              border: Border.all(color: Colors.grey[700]!, width: 1),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.close,
+                  color: Colors.orange,
+                  size: 16.sp,
+                ),
+                SizedBox(width: 4.w),
+                Text(
+                  'Remove Ads',
+                  style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 

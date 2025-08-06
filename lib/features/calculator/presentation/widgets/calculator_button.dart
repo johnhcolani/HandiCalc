@@ -103,12 +103,12 @@ class CalculatorButton extends StatelessWidget {
   }
 
   double _getTextSize() {
-    if (["×", "-", "+", "÷","="].contains(text)) {
-      return 24.sp; // Make these specific operators even bigger
+    if (["C", "±", "%", "÷", "×", "-", "+", "="].contains(text)) {
+      return 24.sp; // Operator buttons bigger text
     } else if (isFraction) {
-      return 14.sp;
+      return 18.sp; // Fraction buttons
     }
-    return 16.sp;
+    return 18.sp; // Number buttons same size as fractions
   }
 
   EdgeInsets _getPadding() => isFraction

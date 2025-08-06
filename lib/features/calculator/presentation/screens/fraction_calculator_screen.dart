@@ -70,13 +70,13 @@ class FractionCalculatorScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.blue.withValues(red: 0.2, blue: 1, green: 1, alpha: 0.1),
           border: GradientBoxBorder(
-            width: 1.dm,
+            width: 8,
             gradient: LinearGradient(colors: [
               Colors.blue.shade300,
               Colors.purple.shade300
             ]),
           ),
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: BorderRadius.circular(16.r),
         ),
         child: Column(
           children: [
@@ -188,7 +188,7 @@ class FractionCalculatorScreen extends StatelessWidget {
 
   Widget _buildScrollableCalculatorButtons(BuildContext context) {
     return SizedBox(
-      height: 0.65.sh, // Max 60% of screen height to prevent overflow
+      height: 0.60.sh, // Reduce height to prevent overflow
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -221,27 +221,20 @@ class FractionCalculatorScreen extends StatelessWidget {
 
   Widget _buildNumberRow(List<String> buttons) {
     return Row(
-      children: buttons.map((text) => CalculatorButton(text: text)).toList(),
+      children: buttons.map((text) => CalculatorButton(
+        text: text,
+        isOperator: ["×", "-", "+"].contains(text),
+      )).toList(),
     );
   }
 
   Widget _buildBottomRow() {
-    return Column(
+    return Row(
       children: [
-        Row(
-          children: [
-            CalculatorButton(text: "0"),
-            CalculatorButton(text: "1/2"),
-            CalculatorButton(text: "⌫", isOperator: true),
-          ],
-        ),
-        const Row(
-          children: [
-
-
-             CalculatorButton(text: "=", isOperator: true),
-          ],
-        ),
+        CalculatorButton(text: "0"),
+        CalculatorButton(text: "1/2"),
+        CalculatorButton(text: "⌫", isOperator: true),
+        CalculatorButton(text: "=", isOperator: true),
       ],
     );
   }
